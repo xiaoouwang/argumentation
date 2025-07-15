@@ -19,9 +19,9 @@ The names of the columns are quite self-explanatory, here are some explanations 
 - `claim_position`: The start and end position of a claim vs. the text in the column`whole_text`.
 - `premise_position`: The start and end position of a premise vs. the text in the column`whole_text`.
 - `summary`: The summary of the whole fact-checking article (see the paper for more details).
-- `whole_text`: The whole text of the fact-checking article.
+- `whole_text`: The text displayed during the annotation task, useful to extract claims and premises using positions (start and end token indices).
 - `fullText_based_content`: The full-length content of the fact-checking article, useful for summary generation.
-- `support_relation` and similar columns: the dependant and governor of each relation. For instance, [1838, 1828] in the row with id 8249 means that the component with id 1838 supports the component with id 1828. In this specific example, 1838 is a premise and 1828 is a claim. 
+- `support_relation` and similar columns: the dependant and governor of each relation. For instance, [1838, 1828] in the row with id 8249 means that the component with id 1838 supports the component with id 1828. In this specific example, 1838 is a premise and 1828 is a claim.
 
 
 
