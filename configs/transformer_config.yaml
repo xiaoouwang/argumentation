@@ -1,0 +1,79 @@
+# Model Configuration
+model:
+  type: "transformer"
+  base_model: "bert-base-uncased"  # or roberta-base, xlnet-base-cased, etc.
+  max_seq_length: 512
+  hidden_dropout_prob: 0.1
+  attention_probs_dropout_prob: 0.1
+  num_hidden_layers: 12
+  hidden_size: 768
+  num_attention_heads: 12
+  intermediate_size: 3072
+  hidden_act: "gelu"
+  layer_norm_eps: 1e-12
+  initializer_range: 0.02
+  output_hidden_states: true
+  output_attentions: false
+
+# Training Configuration
+training:
+  batch_size: 16
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1e-8
+  max_grad_norm: 1.0
+  num_train_epochs: 5
+  warmup_steps: 0
+  warmup_ratio: 0.1
+  gradient_accumulation_steps: 1
+  fp16: true
+  fp16_opt_level: "O1"
+  logging_steps: 100
+  save_steps: 1000
+  evaluation_strategy: "epoch"
+  load_best_model_at_end: true
+  metric_for_best_model: "f1"
+  greater_is_better: true
+  seed: 42
+
+# Data Configuration
+data:
+  train_file: "data/processed/train.json"
+  validation_file: "data/processed/validation.json"
+  test_file: "data/processed/test.json"
+  preprocessing_num_workers: 4
+  overwrite_cache: false
+  pad_to_max_length: true
+  max_train_samples: null  # Set to a number to limit training samples
+  max_eval_samples: null   # Set to a number to limit validation samples
+  max_test_samples: null   # Set to a number to limit test samples
+
+# Task-specific Configuration
+task:
+  name: "argumentation_mining"
+  problem_type: "multi_label_classification"
+  num_labels: 5  # [Claim, Premise, Major Claim, Non-argumentative, Backing]
+  id2label:
+    0: "Claim"
+    1: "Premise"
+    2: "Major_Claim"
+    3: "Non_argumentative"
+    4: "Backing"
+  label2id:
+    "Claim": 0
+    "Premise": 1
+    "Major_Claim": 2
+    "Non_argumentative": 3
+    "Backing": 4
+
+# Relation Classification Configuration
+relation:
+  enabled: true
+  relation_types:
+    - "Support"
+    - "Attack"
+    - "None"
+  use_context: true
+  context_window: 3
